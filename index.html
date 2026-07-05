@@ -1,5 +1,634 @@
 <!DOCTYPE html>
-<html>
-<head><title>Earnings Calculator</title></head>
-<body><h1>Coming soon</h1></body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Take-Home Pay Calculator 2026/27 | Salary After Tax</title>
+  <meta name="description" content="Free UK take-home pay calculator for 2026/27. Instantly see your salary after income tax and National Insurance — England, Wales &amp; Northern Ireland rates.">
+  <meta name="keywords" content="UK take home pay calculator 2026, salary after tax UK, income tax calculator 2026, national insurance calculator, net pay calculator UK">
+  <meta property="og:title" content="UK Take-Home Pay Calculator 2026/27">
+  <meta property="og:description" content="Calculate your UK salary after income tax and National Insurance — instant results for England, Wales &amp; Northern Ireland.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #1e3a5f;
+      --navy-hover:  #2a4f82;
+      --teal:        #0ea5e9;
+      --green:       #15803d;
+      --green-bg:    #dcfce7;
+      --red:         #dc2626;
+      --red-bg:      #fee2e2;
+      --orange:      #c2410c;
+      --orange-bg:   #ffedd5;
+      --bg:          #f0f4f8;
+      --card:        #ffffff;
+      --text:        #1a202c;
+      --muted:       #64748b;
+      --border:      #e2e8f0;
+      --yellow-bg:   #fefce8;
+      --yellow-bd:   #fde047;
+      --yellow-text: #713f12;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--navy);
+      color: #fff;
+      padding: 2.25rem 1rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: clamp(1.5rem, 5vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 0.9375rem;
+      opacity: 0.75;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* ── Layout ── */
+    main {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.07);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Salary input ── */
+    .field-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: .6rem;
+    }
+
+    .salary-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .salary-wrapper .pound {
+      position: absolute;
+      left: 1.1rem;
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--navy);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    #salary {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 2.6rem;
+      font-size: 1.9rem;
+      font-weight: 800;
+      font-family: inherit;
+      color: var(--navy);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      transition: border-color .2s;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    #salary::-webkit-inner-spin-button,
+    #salary::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    #salary:focus { outline: none; border-color: var(--teal); }
+
+    /* ── Frequency toggle ── */
+    .freq-label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .065em;
+      color: var(--muted);
+      margin: 1.4rem 0 .65rem;
+    }
+
+    .freq-group {
+      display: flex;
+      gap: .5rem;
+    }
+
+    .freq-group input[type="radio"] { display: none; }
+
+    .freq-group label {
+      flex: 1;
+      text-align: center;
+      padding: .55rem .5rem;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: background .15s, border-color .15s, color .15s;
+      user-select: none;
+    }
+
+    .freq-group input[type="radio"]:checked + label {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+
+    /* ── Results (hidden until salary entered) ── */
+    .hidden { display: none; }
+
+    /* ── Big take-home number ── */
+    .hero {
+      text-align: center;
+      padding: .5rem 0 1.5rem;
+    }
+
+    .hero .period {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+
+    .hero .amount {
+      font-size: clamp(2.6rem, 10vw, 3.75rem);
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -.03em;
+      line-height: 1.05;
+    }
+
+    .hero .meta {
+      font-size: .8375rem;
+      color: var(--muted);
+      margin-top: .35rem;
+    }
+
+    /* ── Stacked bar chart ── */
+    .bar-wrap {
+      margin: .25rem 0 .9rem;
+    }
+
+    .bar {
+      display: flex;
+      height: 38px;
+      border-radius: 11px;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .seg {
+      height: 100%;
+      transition: width .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    .seg-takehome { background: #16a34a; }
+    .seg-tax      { background: #dc2626; }
+    .seg-ni       { background: #ea580c; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem 1.25rem;
+      margin-top: .7rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Breakdown rows ── */
+    .breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-top: 1.25rem;
+    }
+
+    .brow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .9rem 1rem;
+      border-radius: 11px;
+    }
+
+    .brow.b-take { background: var(--green-bg); }
+    .brow.b-tax  { background: var(--red-bg); }
+    .brow.b-ni   { background: var(--orange-bg); }
+
+    .brow-label {
+      font-weight: 600;
+      font-size: .9375rem;
+    }
+
+    .brow-sub {
+      display: block;
+      font-size: .76rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: .1rem;
+    }
+
+    .brow-amount {
+      text-align: right;
+    }
+
+    .brow-amount .main-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .brow-amount .year-val {
+      display: block;
+      font-size: .73rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: .1rem;
+    }
+
+    .b-take .main-val { color: var(--green); }
+    .b-tax  .main-val { color: var(--red);   }
+    .b-ni   .main-val { color: var(--orange); }
+
+    /* ── All-periods grid ── */
+    .periods-section {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .section-title {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .065em;
+      color: var(--muted);
+      margin-bottom: .75rem;
+    }
+
+    .periods-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .65rem;
+    }
+
+    .period-card {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: .875rem 1rem;
+    }
+
+    .period-card .p-label {
+      font-size: .73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: .2rem;
+    }
+
+    .period-card .p-amount {
+      font-size: 1.175rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    /* ── Scotland notice ── */
+    .notice {
+      margin-top: 1.25rem;
+      background: var(--yellow-bg);
+      border: 1px solid var(--yellow-bd);
+      border-radius: 10px;
+      padding: .8rem 1rem;
+      font-size: .8125rem;
+      color: var(--yellow-text);
+      line-height: 1.55;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: .5rem 1rem 2.5rem;
+      text-align: center;
+      font-size: .76rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    footer p + p { margin-top: .4rem; }
+
+    /* ── Responsive ── */
+    @media (min-width: 500px) {
+      .card { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>UK Take-Home Pay Calculator</h1>
+  <p>2026&thinsp;/&thinsp;27 Tax Year &mdash; England, Wales &amp; Northern Ireland</p>
+</header>
+
+<main>
+
+  <!-- ── Input card ── -->
+  <section class="card" aria-label="Salary input">
+    <label class="field-label" for="salary">Annual Gross Salary</label>
+    <div class="salary-wrapper">
+      <span class="pound">£</span>
+      <input
+        type="number"
+        id="salary"
+        placeholder="35000"
+        min="0"
+        max="2000000"
+        inputmode="numeric"
+        autocomplete="off"
+        aria-label="Annual gross salary in pounds"
+        oninput="recalc()"
+      >
+    </div>
+
+    <span class="freq-label">Show take-home as</span>
+    <div class="freq-group" role="group" aria-label="Pay frequency">
+      <input type="radio" id="f-year"  name="freq" value="year"  checked onchange="recalc()">
+      <label for="f-year">Yearly</label>
+
+      <input type="radio" id="f-month" name="freq" value="month" onchange="recalc()">
+      <label for="f-month">Monthly</label>
+
+      <input type="radio" id="f-week"  name="freq" value="week"  onchange="recalc()">
+      <label for="f-week">Weekly</label>
+
+      <input type="radio" id="f-day"   name="freq" value="day"   onchange="recalc()">
+      <label for="f-day">Daily</label>
+    </div>
+  </section>
+
+  <!-- ── Results card ── -->
+  <section class="card hidden" id="results" aria-label="Calculation results" aria-live="polite">
+
+    <h2 class="hero">
+      <span class="period" id="r-period">Per Year</span>
+      <span class="amount" id="r-amount">£0</span>
+      <span class="meta"  id="r-meta">&nbsp;</span>
+    </h2>
+
+    <!-- Stacked bar chart -->
+    <div class="bar-wrap" role="img" aria-label="Visual breakdown of gross pay">
+      <div class="bar">
+        <div class="seg seg-takehome" id="s-take" style="width:70%"></div>
+        <div class="seg seg-tax"      id="s-tax"  style="width:20%"></div>
+        <div class="seg seg-ni"       id="s-ni"   style="width:10%"></div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="dot" style="background:#16a34a"></div>Take-home</div>
+        <div class="legend-item"><div class="dot" style="background:#dc2626"></div>Income Tax</div>
+        <div class="legend-item"><div class="dot" style="background:#ea580c"></div>National Insurance</div>
+      </div>
+    </div>
+
+    <!-- Breakdown rows -->
+    <div class="breakdown">
+      <div class="brow b-take">
+        <div>
+          <span class="brow-label">Take-Home Pay</span>
+          <small class="brow-sub">After all deductions</small>
+        </div>
+        <div class="brow-amount">
+          <span class="main-val" id="b-take-main">£0</span>
+          <span class="year-val" id="b-take-year"></span>
+        </div>
+      </div>
+
+      <div class="brow b-tax">
+        <div>
+          <span class="brow-label">Income Tax</span>
+          <small class="brow-sub" id="b-tax-sub">Basic rate (20%)</small>
+        </div>
+        <div class="brow-amount">
+          <span class="main-val" id="b-tax-main">£0</span>
+          <span class="year-val" id="b-tax-year"></span>
+        </div>
+      </div>
+
+      <div class="brow b-ni">
+        <div>
+          <span class="brow-label">National Insurance</span>
+          <small class="brow-sub">Class 1 employee &mdash; 2026/27</small>
+        </div>
+        <div class="brow-amount">
+          <span class="main-val" id="b-ni-main">£0</span>
+          <span class="year-val" id="b-ni-year"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- All pay-period breakdown -->
+    <div class="periods-section">
+      <p class="section-title">Take-home across pay periods</p>
+      <div class="periods-grid">
+        <div class="period-card">
+          <p class="p-label">Yearly</p>
+          <p class="p-amount" id="p-year">£0</p>
+        </div>
+        <div class="period-card">
+          <p class="p-label">Monthly</p>
+          <p class="p-amount" id="p-month">£0</p>
+        </div>
+        <div class="period-card">
+          <p class="p-label">Weekly</p>
+          <p class="p-amount" id="p-week">£0</p>
+        </div>
+        <div class="period-card">
+          <p class="p-label">Daily (5-day week)</p>
+          <p class="p-amount" id="p-day">£0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scotland disclaimer -->
+    <div class="notice" role="note">
+      <strong>Scotland:</strong> These figures use England, Wales &amp; Northern Ireland income tax bands. Scotland sets its own rates which differ — this calculator does not yet support Scottish taxpayers.
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PLACEHOLDER: future calculators for TikTok/YouTube/Instagram
+     income estimators will link here.
+
+     Planned tools:
+       - TikTok Creator Fund & TikTok Shop income estimator
+       - YouTube AdSense / CPM earnings calculator
+       - Instagram / Reels sponsored-post income estimator
+     Each will follow the same mobile-first, no-framework pattern.
+     ═══════════════════════════════════════════════════════════ -->
+<section id="future-tools" aria-hidden="true"></section>
+
+<footer>
+  <p>Estimates only, for England/Wales/NI tax rates 2026/27. Not financial advice. Consult HMRC or an accountant for exact figures.</p>
+  <p>Income Tax and National Insurance figures are based on HMRC published thresholds for the 2026/27 tax year. Daily take-home assumes a standard 260-day (5&thinsp;×&thinsp;52&thinsp;week) working year.</p>
+</footer>
+
+<script>
+  // ── 2026/27 UK tax constants ──────────────────────────────────
+  var PA_BASE    = 12570;   // personal allowance
+  var BR_TOP     = 50270;   // basic-rate ceiling
+  var HR_TOP     = 125140;  // higher-rate ceiling / PA taper end
+  var TAPER_FROM = 100000;  // PA taper starts here
+  var NI_LOWER   = 12584;   // £242/week × 52
+  var NI_UPPER   = 50270;
+  var WORK_DAYS  = 260;     // 5-day week × 52
+
+  // ── Tax logic ─────────────────────────────────────────────────
+  function personalAllowance(gross) {
+    if (gross >= HR_TOP) return 0;
+    if (gross > TAPER_FROM)
+      return Math.max(0, PA_BASE - Math.floor((gross - TAPER_FROM) / 2));
+    return PA_BASE;
+  }
+
+  function incomeTax(gross) {
+    var pa  = personalAllowance(gross);
+    var tax = 0;
+    var rem = gross;
+
+    if (rem > HR_TOP) { tax += (rem - HR_TOP) * 0.45; rem = HR_TOP; }
+    if (rem > BR_TOP) { tax += (rem - BR_TOP) * 0.40; rem = BR_TOP; }
+    if (rem > pa)     { tax += (rem - pa)     * 0.20; }
+
+    return Math.max(0, tax);
+  }
+
+  function nationalInsurance(gross) {
+    if (gross <= NI_LOWER) return 0;
+    var ni = 0;
+    if (gross > NI_UPPER) {
+      ni += (gross - NI_UPPER) * 0.02;
+      ni += (NI_UPPER - NI_LOWER) * 0.08;
+    } else {
+      ni += (gross - NI_LOWER) * 0.08;
+    }
+    return Math.max(0, ni);
+  }
+
+  // ── Formatting helpers ────────────────────────────────────────
+  function gbp(val) {
+    return '£' + Math.round(val).toLocaleString('en-GB');
+  }
+
+  function pct(val, total) {
+    return total > 0 ? ((val / total) * 100).toFixed(1) + '%' : '0%';
+  }
+
+  var FREQ_LABELS = { year: 'Per Year', month: 'Per Month', week: 'Per Week', day: 'Per Day' };
+  var FREQ_DIV    = { year: 1, month: 12, week: 52, day: WORK_DAYS };
+
+  function taxBandLabel(gross) {
+    if (gross > HR_TOP) return 'Basic, higher & additional rate';
+    if (gross > BR_TOP) return 'Basic & higher rate (up to 40%)';
+    if (gross > PA_BASE) return 'Basic rate (20%)';
+    return 'Within personal allowance';
+  }
+
+  // ── Main calculation ──────────────────────────────────────────
+  function recalc() {
+    var gross   = parseFloat(document.getElementById('salary').value) || 0;
+    var results = document.getElementById('results');
+
+    if (gross <= 0) { results.classList.add('hidden'); return; }
+    results.classList.remove('hidden');
+
+    var tax      = incomeTax(gross);
+    var ni       = nationalInsurance(gross);
+    var takeHome = gross - tax - ni;
+    var pa       = personalAllowance(gross);
+
+    var freq = document.querySelector('input[name="freq"]:checked').value;
+    var div  = FREQ_DIV[freq];
+
+    // Bar percentages
+    document.getElementById('s-take').style.width = pct(takeHome, gross);
+    document.getElementById('s-tax' ).style.width = pct(tax,      gross);
+    document.getElementById('s-ni'  ).style.width = pct(ni,       gross);
+
+    // Hero
+    document.getElementById('r-period').textContent = FREQ_LABELS[freq];
+    document.getElementById('r-amount').textContent = gbp(takeHome / div);
+    document.getElementById('r-meta'  ).textContent =
+      'Effective rate: ' + pct(tax + ni, gross) +
+      ' · Personal allowance: ' + gbp(pa);
+
+    // Breakdown rows
+    function setRow(mainId, yearId, val, showYear) {
+      document.getElementById(mainId).textContent = gbp(val / div);
+      var el = document.getElementById(yearId);
+      el.textContent = (showYear && freq !== 'year') ? gbp(val) + ' / year' : '';
+    }
+
+    setRow('b-take-main', 'b-take-year', takeHome, true);
+    setRow('b-tax-main',  'b-tax-year',  tax,      true);
+    setRow('b-ni-main',   'b-ni-year',   ni,       true);
+    document.getElementById('b-tax-sub').textContent = taxBandLabel(gross);
+
+    // All periods
+    document.getElementById('p-year' ).textContent = gbp(takeHome);
+    document.getElementById('p-month').textContent = gbp(takeHome / 12);
+    document.getElementById('p-week' ).textContent = gbp(takeHome / 52);
+    document.getElementById('p-day'  ).textContent = gbp(takeHome / WORK_DAYS);
+  }
+</script>
+
+</body>
 </html>
