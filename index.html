@@ -417,7 +417,23 @@
 
   <!-- ── Input card ── -->
   <section class="card" aria-label="Salary input">
-    <label class="field-label" for="salary">Annual Gross Salary</label>
+
+    <span class="freq-label" style="margin-top:0">My pay is</span>
+    <div class="freq-group" role="group" aria-label="Input pay frequency">
+      <input type="radio" id="if-year"  name="in-freq" value="year"  checked onchange="recalc()">
+      <label for="if-year">Yearly</label>
+
+      <input type="radio" id="if-month" name="in-freq" value="month" onchange="recalc()">
+      <label for="if-month">Monthly</label>
+
+      <input type="radio" id="if-week"  name="in-freq" value="week"  onchange="recalc()">
+      <label for="if-week">Weekly</label>
+
+      <input type="radio" id="if-day"   name="in-freq" value="day"   onchange="recalc()">
+      <label for="if-day">Daily</label>
+    </div>
+
+    <label class="field-label" for="salary" id="salary-label" style="margin-top:1.4rem">Annual Gross Salary</label>
     <div class="salary-wrapper">
       <span class="pound">£</span>
       <input
@@ -428,13 +444,12 @@
         max="2000000"
         inputmode="numeric"
         autocomplete="off"
-        aria-label="Annual gross salary in pounds"
         oninput="recalc()"
       >
     </div>
 
     <span class="freq-label">Show take-home as</span>
-    <div class="freq-group" role="group" aria-label="Pay frequency">
+    <div class="freq-group" role="group" aria-label="Output pay frequency">
       <input type="radio" id="f-year"  name="freq" value="year"  checked onchange="recalc()">
       <label for="f-year">Yearly</label>
 
@@ -611,6 +626,16 @@
   var FREQ_LABELS = { year: 'Per Year', month: 'Per Month', week: 'Per Week', day: 'Per Day' };
   var FREQ_DIV    = { year: 1, month: 12, week: 52, day: WORK_DAYS };
 
+  // Input frequency — multiplier to convert entered value to annual gross
+  var IN_MULT  = { year: 1, month: 12, week: 52, day: WORK_DAYS };
+  var IN_LABEL = {
+    year:  'Annual Gross Salary',
+    month: 'Monthly Gross Pay',
+    week:  'Weekly Gross Pay',
+    day:   'Daily Gross Pay'
+  };
+  var IN_PLACEHOLDER = { year: '35000', month: '2917', week: '673', day: '135' };
+
   function taxBandLabel(gross) {
     if (gross > HR_TOP) return 'Basic, higher & additional rate';
     if (gross > BR_TOP) return 'Basic & higher rate (up to 40%)';
@@ -620,10 +645,18 @@
 
   // ── Main calculation ──────────────────────────────────────────
   function recalc() {
-    var gross   = parseFloat(document.getElementById('salary').value) || 0;
+    var salaryEl = document.getElementById('salary');
+    var inFreq   = document.querySelector('input[name="in-freq"]:checked').value;
+
+    // Update label and placeholder to match selected input frequency
+    document.getElementById('salary-label').textContent = IN_LABEL[inFreq];
+    salaryEl.placeholder = IN_PLACEHOLDER[inFreq];
+
+    var rawVal  = parseFloat(salaryEl.value) || 0;
+    var gross   = rawVal * IN_MULT[inFreq];   // always annual for tax calculations
     var results = document.getElementById('results');
 
-    if (gross <= 0) { results.classList.add('hidden'); return; }
+    if (rawVal <= 0) { results.classList.add('hidden'); return; }
     results.classList.remove('hidden');
 
     var tax      = incomeTax(gross);
