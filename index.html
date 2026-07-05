@@ -364,6 +364,38 @@
 
     footer p + p { margin-top: .4rem; }
 
+    /* ── Nav ── */
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+
+    .nav-link {
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      font-size: .8125rem;
+      font-weight: 600;
+      padding: .35rem .875rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.25);
+      transition: color .15s, background .15s, border-color .15s;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.4);
+    }
+
+    .nav-link.active {
+      color: var(--navy);
+      background: #fff;
+      border-color: #fff;
+    }
+
     /* ── Responsive ── */
     @media (min-width: 500px) {
       .card { padding: 2rem; }
@@ -373,6 +405,10 @@
 <body>
 
 <header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="index.html" class="nav-link active" aria-current="page">Take-Home Pay</a>
+    <a href="tiktok-income-calculator.html" class="nav-link">TikTok Income</a>
+  </nav>
   <h1>UK Take-Home Pay Calculator</h1>
   <p>2026&thinsp;/&thinsp;27 Tax Year &mdash; England, Wales &amp; Northern Ireland</p>
 </header>
@@ -505,11 +541,10 @@
 </main>
 
 <!-- ═══════════════════════════════════════════════════════════
-     PLACEHOLDER: future calculators for TikTok/YouTube/Instagram
-     income estimators will link here.
+     CREATOR INCOME TOOLS — linked from nav above
+     Live: tiktok-income-calculator.html
 
-     Planned tools:
-       - TikTok Creator Fund & TikTok Shop income estimator
+     PLACEHOLDER: future calculators will link here too.
        - YouTube AdSense / CPM earnings calculator
        - Instagram / Reels sponsored-post income estimator
      Each will follow the same mobile-first, no-framework pattern.
