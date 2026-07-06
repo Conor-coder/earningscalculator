@@ -364,6 +364,64 @@
 
     footer p + p { margin-top: .4rem; }
 
+    /* ── Nav ── */
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+
+    .nav-link {
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      font-size: .8125rem;
+      font-weight: 600;
+      padding: .35rem .875rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.25);
+      transition: color .15s, background .15s, border-color .15s;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.4);
+    }
+
+    .nav-link.active {
+      color: var(--navy);
+      background: #fff;
+      border-color: #fff;
+    }
+
+    /* ── Explainer prose ── */
+    .explainer h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .9rem;
+    }
+
+    .explainer p {
+      font-size: .9375rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: .8rem;
+    }
+
+    .explainer p:last-child { margin-bottom: 0; }
+
+    .explainer a {
+      color: var(--teal);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .explainer a:hover { color: var(--navy); }
+
     /* ── Responsive ── */
     @media (min-width: 500px) {
       .card { padding: 2rem; }
@@ -373,6 +431,9 @@
 <body>
 
 <header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="articles/" class="nav-link">Articles</a>
+  </nav>
   <h1>UK Take-Home Pay Calculator</h1>
   <p>2026&thinsp;/&thinsp;27 Tax Year &mdash; England, Wales &amp; Northern Ireland</p>
 </header>
@@ -515,6 +576,14 @@
       <strong>Scotland:</strong> These figures use England, Wales &amp; Northern Ireland income tax bands. Scotland sets its own rates which differ — this calculator does not yet support Scottish taxpayers.
     </div>
 
+  </section>
+
+  <!-- ── Explainer section ── -->
+  <section class="card explainer" aria-label="How income tax and National Insurance work">
+    <h2>How Income Tax and National Insurance Work</h2>
+    <p>Income Tax is charged on your earnings above a tax-free threshold called the <strong>Personal Allowance</strong> — £12,570 in 2026/27. Earnings above that are taxed at 20% (the basic rate) up to £50,270, then 40% beyond that. Both rates apply only to the slice of income within each band, not your whole salary — so earning £51,000 doesn't mean everything is taxed at 40%, only the £730 above £50,270.</p>
+    <p>National Insurance (NI) is a separate deduction that funds the NHS, state pension, and certain benefits. Class 1 employee NI — the type deducted from a salary — starts at £12,584 a year, at 8% up to £50,270 and 2% above that. Because NI and Income Tax have different starting thresholds and different rates, the effect of a pay rise on your take-home is rarely as straightforward as it looks.</p>
+    <p>Both are collected automatically by your employer through PAYE before you receive your pay — the figure in your bank account is already after both deductions. To see exactly how this plays out at real salary levels, take a look at our <a href="articles/salary-take-home-examples.html">worked examples for common salaries from £25k to £60k</a>, or find out <a href="articles/minimum-wage-take-home-pay.html">what minimum wage workers actually take home</a> after tax in 2026/27.</p>
   </section>
 
 </main>
