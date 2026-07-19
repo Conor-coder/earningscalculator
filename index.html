@@ -9,6 +9,46 @@
   <meta property="og:title" content="UK Take-Home Pay Calculator 2026/27">
   <meta property="og:description" content="Calculate your UK salary after income tax and National Insurance — instant results for England, Wales &amp; Northern Ireland.">
   <meta property="og:type" content="website">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate my take-home pay in the UK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Subtract Income Tax and National Insurance from your gross salary. For 2026/27, Income Tax is 20% on earnings above the £12,570 personal allowance (up to £50,270) and 40% above that, while National Insurance is 8% on earnings between £12,584 and £50,270, and 2% above. Enter your salary and this calculator does the maths for you, including any pension contributions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the personal allowance for 2026/27?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The personal allowance for 2026/27 is £12,570 — the amount you can earn each year before paying any Income Tax. It shrinks by £1 for every £2 you earn above £100,000, and disappears completely once your income reaches £125,140."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much tax will I pay on my salary?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on how much you earn. In 2026/27 there's no Income Tax on the first £12,570, then 20% on income between £12,570 and £50,270, and 40% on anything from £50,270 up to £125,140. National Insurance is separate, charged at 8% between £12,584 and £50,270 and 2% above that."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between gross and net pay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gross pay is your salary before any deductions — the headline figure in your contract or job advert. Net pay, also called take-home pay, is what actually lands in your bank account after Income Tax, National Insurance, and any pension contributions have been deducted by your employer through PAYE."
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -401,6 +441,34 @@
       border-color: #fff;
     }
 
+    /* ── Trust badges ── */
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-top: 1.1rem;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .74rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: .3rem .7rem;
+      letter-spacing: .01em;
+    }
+
+    .trust-badge .tick {
+      color: #4ade80;
+      font-weight: 800;
+    }
+
     /* ── Explainer prose ── */
     .explainer h2 {
       font-size: 1.125rem;
@@ -426,6 +494,26 @@
     }
 
     .explainer a:hover { color: var(--navy); }
+
+    /* ── FAQ section ── */
+    .faq-item + .faq-item {
+      margin-top: 1.1rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-item h3 {
+      font-size: .9375rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .4rem;
+    }
+
+    .faq-item p {
+      font-size: .9rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
 
     /* ── Pension section ── */
     .pension-toggle {
@@ -536,6 +624,12 @@
   </nav>
   <h1>UK Take-Home Pay Calculator</h1>
   <p>2026&thinsp;/&thinsp;27 Tax Year &mdash; England, Wales &amp; Northern Ireland</p>
+  <div class="trust-badges" aria-label="Trust indicators">
+    <span class="trust-badge"><span class="tick" aria-hidden="true">✓</span>HMRC Rates</span>
+    <span class="trust-badge"><span class="tick" aria-hidden="true">✓</span>Always Free</span>
+    <span class="trust-badge"><span class="tick" aria-hidden="true">✓</span>No Sign-Up</span>
+    <span class="trust-badge"><span class="tick" aria-hidden="true">✓</span>Updated for 2026/27</span>
+  </div>
 </header>
 
 <main>
@@ -737,12 +831,38 @@
     <p>Both are collected automatically by your employer through PAYE before you receive your pay — the figure in your bank account is already after both deductions. To see exactly how this plays out at real salary levels, take a look at our <a href="articles/salary-take-home-examples.html">worked examples for common salaries from £25k to £60k</a>, or find out <a href="articles/minimum-wage-take-home-pay.html">what minimum wage workers actually take home</a> after tax in 2026/27.</p>
   </section>
 
+  <!-- ── FAQ section ── -->
+  <section class="card explainer" aria-label="Frequently asked questions">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h3>How do I calculate my take-home pay in the UK?</h3>
+      <p>Subtract Income Tax and National Insurance from your gross salary. For 2026/27, Income Tax is 20% on earnings above the £12,570 personal allowance (up to £50,270) and 40% above that, while National Insurance is 8% on earnings between £12,584 and £50,270, and 2% above. Enter your salary above and this calculator does the maths for you, including any pension contributions.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What is the personal allowance for 2026/27?</h3>
+      <p>The personal allowance for 2026/27 is £12,570 — the amount you can earn each year before paying any Income Tax. It shrinks by £1 for every £2 you earn above £100,000, and disappears completely once your income reaches £125,140.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How much tax will I pay on my salary?</h3>
+      <p>It depends on how much you earn. In 2026/27 there's no Income Tax on the first £12,570, then 20% on income between £12,570 and £50,270, and 40% on anything from £50,270 up to £125,140. National Insurance is separate, charged at 8% between £12,584 and £50,270 and 2% above that. Enter your salary above to see your exact breakdown.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What's the difference between gross and net pay?</h3>
+      <p>Gross pay is your salary before any deductions — the headline figure in your contract or job advert. Net pay, also called take-home pay, is what actually lands in your bank account after Income Tax, National Insurance, and any pension contributions have been deducted by your employer through PAYE.</p>
+    </div>
+  </section>
+
 </main>
 
 
 <footer>
   <p>Estimates only, for England/Wales/NI tax rates 2026/27. Not financial advice. Consult HMRC or an accountant for exact figures.</p>
   <p>Income Tax and National Insurance figures are based on HMRC published thresholds for the 2026/27 tax year. Daily take-home assumes a standard 260-day (5&thinsp;×&thinsp;52&thinsp;week) working year.</p>
+  <p>Built by Conor Moran, a UK-based developer, using official HMRC rates for the 2026/27 tax year.</p>
 </footer>
 
 <script>

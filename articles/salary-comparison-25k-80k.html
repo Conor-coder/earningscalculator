@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>£25k, £35k, £45k, £60k, £80k Take-Home Pay UK 2026/27 | After Tax</title>
+  <meta name="description" content="How much do you actually take home on a £25k, £35k, £45k, £60k or £80k salary in the UK? Yearly, monthly and weekly figures using 2026/27 Income Tax and National Insurance rates, including the jump into higher-rate tax.">
+  <meta name="keywords" content="80k salary after tax UK 2026, 45k take home pay UK, 60k salary after tax UK 2026, higher rate tax UK 2026, UK salary comparison 2026">
+  <meta property="og:title" content="£25k–£80k Take-Home Pay UK 2026/27 — Salary Comparison">
+  <meta property="og:description" content="Yearly, monthly and weekly take-home figures across five UK salary levels, from basic rate through to higher-rate tax, using confirmed 2026/27 rates.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1e3a5f;
+      --navy-hover: #2a4f82;
+      --teal:       #0ea5e9;
+      --green:      #15803d;
+      --green-bg:   #dcfce7;
+      --orange:     #c2410c;
+      --orange-bg:  #ffedd5;
+      --bg:         #f0f4f8;
+      --card:       #ffffff;
+      --text:       #1a202c;
+      --muted:      #64748b;
+      --border:     #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Header & Nav ── */
+    header {
+      background: var(--navy);
+      color: #fff;
+      padding: 1.5rem 1rem 2rem;
+      text-align: center;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-link {
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      font-size: .8125rem;
+      font-weight: 600;
+      padding: .35rem .875rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.25);
+      transition: color .15s, background .15s, border-color .15s;
+    }
+
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); }
+    .nav-link.active { color: var(--navy); background: #fff; border-color: #fff; }
+
+    header h1 {
+      font-size: clamp(1.35rem, 4.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: 1.2;
+      margin-bottom: .5rem;
+    }
+
+    header p { font-size: .9rem; opacity: .75; max-width: 500px; margin: 0 auto; }
+
+    /* ── Layout ── */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1.75rem 1rem 1rem;
+    }
+
+    /* ── Article prose ── */
+    .prose {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.07);
+      margin-bottom: 1.25rem;
+    }
+
+    .prose p {
+      font-size: .9375rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: .75rem;
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose a { color: var(--teal); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+    .prose a:hover { color: var(--navy); }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Salary cards ── */
+    .salary-cards { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem; }
+
+    .salary-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.375rem 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    .sc-gross {
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+      padding-bottom: .875rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .sc-gross-amount {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -.02em;
+    }
+
+    .sc-gross-label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .sc-band {
+      margin-left: auto;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--orange);
+      background: var(--orange-bg);
+      padding: .2rem .55rem;
+      border-radius: 5px;
+    }
+
+    /* Take-home periods */
+    .sc-periods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .sc-period-label {
+      display: block;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+
+    .sc-period-amount {
+      display: block;
+      font-size: clamp(1.15rem, 3.5vw, 1.35rem);
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -.02em;
+    }
+
+    /* Deductions row */
+    .sc-deductions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem .875rem;
+      padding-top: .875rem;
+      border-top: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .sc-deductions strong { color: var(--text); font-weight: 600; }
+
+    .sc-rate {
+      margin-left: auto;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.07);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    .cta-wrap p {
+      font-size: .9375rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      text-decoration: none;
+      padding: .875rem 1.75rem;
+      border-radius: 10px;
+      font-size: .9375rem;
+      font-weight: 700;
+      transition: background .15s;
+    }
+
+    .cta-btn:hover { background: var(--navy-hover); }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: .5rem 1rem 2.5rem;
+      text-align: center;
+      font-size: .76rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    footer p + p { margin-top: .4rem; }
+
+    @media (min-width: 500px) {
+      .prose, .salary-card, .cta-wrap { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="../index.html" class="nav-link">Calculator</a>
+    <a href="index.html" class="nav-link active" aria-current="page">Articles</a>
+  </nav>
+  <h1>£25k to £80k &mdash; How Take-Home Pay Compares</h1>
+  <p>2026/27 Tax Year &mdash; England, Wales &amp; Northern Ireland</p>
+</header>
+
+<main>
+
+  <!-- Intro -->
+  <div class="prose">
+    <p>Take-home pay doesn't scale in a straight line with salary. Once you cross £50,270, every extra pound is taxed at 40% instead of 20%, so the gap between your gross salary and what actually lands in your account widens fast. The five salaries below span that gap — from £25k, well within the basic rate band, up to £80k, firmly into higher-rate tax — using confirmed 2026/27 Income Tax and National Insurance rates: a Personal Allowance of £12,570, basic rate at 20% up to £50,270, higher rate at 40% above that, and Class 1 employee NI at 8% (2% above £50,270). All figures are rounded to the nearest pound.</p>
+  </div>
+
+  <!-- Salary cards -->
+  <p class="section-label" style="padding:0 .25rem">Take-home pay after Income Tax and National Insurance</p>
+  <div class="salary-cards">
+
+    <!-- £25,000 -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£25,000</span>
+        <span class="sc-gross-label">gross per year</span>
+        <span class="sc-band">Basic rate</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£21,521</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£1,793</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£414</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£2,486</strong></span>
+        <span>National Insurance: <strong>£993</strong></span>
+        <span class="sc-rate">Effective rate: 13.9%</span>
+      </div>
+    </article>
+
+    <!-- £35,000 -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£35,000</span>
+        <span class="sc-gross-label">gross per year</span>
+        <span class="sc-band">Basic rate</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£28,721</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£2,393</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£552</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£4,486</strong></span>
+        <span>National Insurance: <strong>£1,793</strong></span>
+        <span class="sc-rate">Effective rate: 17.9%</span>
+      </div>
+    </article>
+
+    <!-- £45,000 -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£45,000</span>
+        <span class="sc-gross-label">gross per year</span>
+        <span class="sc-band">Basic rate</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£35,921</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£2,993</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£691</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£6,486</strong></span>
+        <span>National Insurance: <strong>£2,593</strong></span>
+        <span class="sc-rate">Effective rate: 20.2%</span>
+      </div>
+    </article>
+
+    <!-- £60,000 -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£60,000</span>
+        <span class="sc-gross-label">gross per year</span>
+        <span class="sc-band">Higher rate</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£45,359</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£3,780</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£872</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£11,432</strong></span>
+        <span>National Insurance: <strong>£3,209</strong></span>
+        <span class="sc-rate">Effective rate: 24.4%</span>
+      </div>
+    </article>
+
+    <!-- £80,000 -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£80,000</span>
+        <span class="sc-gross-label">gross per year</span>
+        <span class="sc-band">Higher rate</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£56,959</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£4,747</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£1,095</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£19,432</strong></span>
+        <span>National Insurance: <strong>£3,609</strong></span>
+        <span class="sc-rate">Effective rate: 28.8%</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Closing -->
+  <div class="prose">
+    <p>Notice how the effective tax rate climbs faster once you're above £50,270 — between £45k and £60k it jumps from 20.2% to 24.4%, a bigger increase than between £25k and £45k combined. That's the higher-rate band at work. These are estimates based on England, Wales and Northern Ireland Income Tax rates; Scottish taxpayers pay different rates set by the Scottish Parliament. Pension contributions, student loan repayments, or other deductions would further reduce take-home pay and aren't included here. For a precise figure at your exact salary, use the calculator.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <p>Your salary, your exact deductions — enter any gross amount and see yearly, monthly, weekly and daily take-home figures instantly.</p>
+    <a href="../index.html" class="cta-btn">Calculate your exact take-home pay &rarr;</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>Estimates only, for England/Wales/NI tax rates 2026/27. Not financial advice. Consult HMRC or an accountant for exact figures.</p>
+  <p>Figures calculated using 2026/27 Personal Allowance of £12,570, basic rate Income Tax of 20%, higher rate of 40%, and Class 1 employee NI thresholds.</p>
+</footer>
+
+</body>
+</html>
