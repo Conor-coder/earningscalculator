@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Minimum Wage Take-Home Pay 2026/27 | After Tax</title>
+  <meta name="description" content="What UK minimum wage workers actually take home in 2026/27. Full-time take-home pay for the National Living Wage (£12.71/hr) and age-band rates, after Income Tax and National Insurance.">
+  <meta name="keywords" content="national living wage take home pay 2026, minimum wage after tax UK 2026, £12.71 an hour take home, national minimum wage 2026 rates, apprentice wage after tax">
+  <meta property="og:title" content="UK Minimum Wage Take-Home Pay 2026/27">
+  <meta property="og:description" content="Full-time take-home pay for every National Minimum Wage and National Living Wage age band, using confirmed 2026/27 Income Tax and National Insurance rates.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1e3a5f;
+      --navy-hover: #2a4f82;
+      --teal:       #0ea5e9;
+      --green:      #15803d;
+      --green-bg:   #dcfce7;
+      --orange:     #c2410c;
+      --orange-bg:  #ffedd5;
+      --bg:         #f0f4f8;
+      --card:       #ffffff;
+      --text:       #1a202c;
+      --muted:      #64748b;
+      --border:     #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Header & Nav ── */
+    header {
+      background: var(--navy);
+      color: #fff;
+      padding: 1.5rem 1rem 2rem;
+      text-align: center;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-link {
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      font-size: .8125rem;
+      font-weight: 600;
+      padding: .35rem .875rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.25);
+      transition: color .15s, background .15s, border-color .15s;
+    }
+
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); }
+    .nav-link.active { color: var(--navy); background: #fff; border-color: #fff; }
+
+    header h1 {
+      font-size: clamp(1.35rem, 4.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: 1.2;
+      margin-bottom: .5rem;
+    }
+
+    header p { font-size: .9rem; opacity: .75; max-width: 500px; margin: 0 auto; }
+
+    /* ── Layout ── */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1.75rem 1rem 1rem;
+    }
+
+    /* ── Article prose ── */
+    .prose {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.07);
+      margin-bottom: 1.25rem;
+    }
+
+    .prose p {
+      font-size: .9375rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: .75rem;
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose a { color: var(--teal); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+    .prose a:hover { color: var(--navy); }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Salary cards ── */
+    .salary-cards { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem; }
+
+    .salary-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.375rem 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    .sc-gross {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: .5rem;
+      padding-bottom: .875rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .sc-gross-amount {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -.02em;
+    }
+
+    .sc-gross-label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .sc-band {
+      margin-left: auto;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--orange);
+      background: var(--orange-bg);
+      padding: .2rem .55rem;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    /* Take-home periods */
+    .sc-periods {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .75rem .5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .sc-period-label {
+      display: block;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+
+    .sc-period-amount {
+      display: block;
+      font-size: clamp(1.15rem, 3.5vw, 1.35rem);
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -.02em;
+    }
+
+    /* Deductions row */
+    .sc-deductions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem .875rem;
+      padding-top: .875rem;
+      border-top: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .sc-deductions strong { color: var(--text); font-weight: 600; }
+
+    .sc-rate {
+      margin-left: auto;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.07);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    .cta-wrap p {
+      font-size: .9375rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      text-decoration: none;
+      padding: .875rem 1.75rem;
+      border-radius: 10px;
+      font-size: .9375rem;
+      font-weight: 700;
+      transition: background .15s;
+    }
+
+    .cta-btn:hover { background: var(--navy-hover); }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: .5rem 1rem 2.5rem;
+      text-align: center;
+      font-size: .76rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    footer p + p { margin-top: .4rem; }
+
+    @media (min-width: 500px) {
+      .prose, .salary-card, .cta-wrap { padding: 2rem; }
+      .sc-periods { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="../index.html" class="nav-link">Calculator</a>
+    <a href="index.html" class="nav-link active" aria-current="page">Articles</a>
+  </nav>
+  <h1>UK Minimum Wage Take-Home Pay 2026/27</h1>
+  <p>National Living Wage &amp; age-band rates &mdash; England, Wales &amp; Northern Ireland</p>
+</header>
+
+<main>
+
+  <!-- Intro -->
+  <div class="prose">
+    <p>From 1 April 2026, the National Living Wage (for workers aged 21 and over) is £12.71 an hour, with lower age-band rates for younger workers and apprentices. The figures below show what a full-time worker on each rate actually takes home after Income Tax and National Insurance, assuming a standard 37.5-hour week worked 52 weeks a year — a common full-time pattern, though actual contracted hours vary by employer. Many minimum wage roles are part-time, in which case your take-home would be lower in proportion to hours worked; use the calculator above for your exact hours and pay.</p>
+  </div>
+
+  <!-- Rate cards -->
+  <p class="section-label" style="padding:0 .25rem">Full-time take-home pay by age band (37.5 hrs/week)</p>
+  <div class="salary-cards">
+
+    <!-- National Living Wage 21+ -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£12.71/hour</span>
+        <span class="sc-gross-label">National Living Wage &mdash; Age 21+</span>
+        <span class="sc-band">£24,785/yr gross</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£21,366</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£1,780</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£411</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Daily</span>
+          <span class="sc-period-amount">£82</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£2,443</strong></span>
+        <span>National Insurance: <strong>£976</strong></span>
+        <span class="sc-rate">Effective rate: 13.8%</span>
+      </div>
+    </article>
+
+    <!-- 18-20 -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£10.85/hour</span>
+        <span class="sc-gross-label">National Minimum Wage &mdash; Age 18&ndash;20</span>
+        <span class="sc-band">£21,158/yr gross</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£18,754</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£1,563</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£361</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Daily</span>
+          <span class="sc-period-amount">£72</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£1,718</strong></span>
+        <span>National Insurance: <strong>£686</strong></span>
+        <span class="sc-rate">Effective rate: 11.4%</span>
+      </div>
+    </article>
+
+    <!-- Under 18 -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£8.00/hour</span>
+        <span class="sc-gross-label">National Minimum Wage &mdash; Under 18</span>
+        <span class="sc-band">£15,600/yr gross</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£14,753</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£1,229</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£284</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Daily</span>
+          <span class="sc-period-amount">£57</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£606</strong></span>
+        <span>National Insurance: <strong>£241</strong></span>
+        <span class="sc-rate">Effective rate: 5.4%</span>
+      </div>
+    </article>
+
+    <!-- Apprentice -->
+    <article class="salary-card">
+      <div class="sc-gross">
+        <span class="sc-gross-amount">£8.00/hour</span>
+        <span class="sc-gross-label">Apprentice Rate</span>
+        <span class="sc-band">£15,600/yr gross</span>
+      </div>
+      <div class="sc-periods">
+        <div>
+          <span class="sc-period-label">Yearly</span>
+          <span class="sc-period-amount">£14,753</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Monthly</span>
+          <span class="sc-period-amount">£1,229</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Weekly</span>
+          <span class="sc-period-amount">£284</span>
+        </div>
+        <div>
+          <span class="sc-period-label">Daily</span>
+          <span class="sc-period-amount">£57</span>
+        </div>
+      </div>
+      <div class="sc-deductions">
+        <span>Income Tax: <strong>£606</strong></span>
+        <span>National Insurance: <strong>£241</strong></span>
+        <span class="sc-rate">Effective rate: 5.4%</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Closing -->
+  <div class="prose">
+    <p>The apprentice rate of £8.00 an hour applies to apprentices under 19, and those 19 or over who are in their first year of an apprenticeship — after that, apprentices are entitled to the National Minimum Wage rate for their age. All figures above use the 2026/27 Personal Allowance of £12,570 and Class 1 employee National Insurance thresholds, which apply the same way regardless of age. These are estimates for England, Wales and Northern Ireland; part-time hours, student loan repayments, or pension contributions would change the result. Use the calculator for your exact hours and pay.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <p>Working part-time, or paid weekly instead of hourly? Enter your exact pay and hours to see precise yearly, monthly, weekly and daily take-home figures.</p>
+    <a href="../index.html" class="cta-btn">Calculate your exact take-home pay &rarr;</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>Estimates only, for England/Wales/NI tax rates 2026/27. Not financial advice. Consult HMRC or an accountant for exact figures.</p>
+  <p>Minimum wage rates effective from 1 April 2026, per gov.uk. Full-time figures assume a 37.5-hour week worked 52 weeks a year; actual contracted hours vary by employer.</p>
+</footer>
+
+</body>
+</html>
